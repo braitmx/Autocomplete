@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>Main Page</title>
+</head>
+<style>
+    .container {
+        max-width: 243px;
+    }
+    
+    .container ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .bgGreen {
+        background: darkseagreen;
+    }
+</style>
+
+<body>
+    <h1>Search your city:</h1>
+    <input id="inputText" type="text" size="30" value="">
+    <input id="inputText" type="hidden" size="4" value="">
+    <div class="container">
+        <ul id="resultList">
+        </ul>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var resultList = document.getElementById('resultList'); 
+        var prevValue = '';
+        var activeHintIndex = 0;  
+        var input = document.getElementById('inputText');
+        var liLength = 0;
+
+        // use add event listener
+        input.onkeyup = function (e) {
+            var regRepl = this.value.replace(/[^a-z]/gi,'');
+
+            if (prevValue === regRepl) return;
+            if (regRepl === '') activeHintIndex = 0;
+
+            if (regRepl != '') {
+
+                $.post("/api/cities/", {value: regRepl})
+                        .done(function (data) {
+                           debugger;
+                            while(resultList.childNodes[0]){
+                                resultList.removeChild(resultList.childNodes[0]);
+                            }    
+
+                            data.forEach(function(item, i, data) {
+                                debugger;
+                                if (item != '') {
+                                    resultList.innerHTML = "<li id='" + item.id + "' data='" + i + "' >" + item.city + "</li>"; 
+                                }
+                                else {
+                                    resultList.innerHTML = "<li>" + "Not found." + "</li>";
+                                    return;
+                                }                 
+                            });
+
+                            liLength = data.length - 1;
+
+                            $("#resultList li").on('click', function (e) {
+                                e.preventDefault();
+
+                                $('#inputText').val($(this).text());
+                            });
+                        });
+            }
+            else  {
+                   while(resultList.childNodes[0]){
+                     resultList.removeChild(resultList.childNodes[0]);
+                   }  
+            }
+
+            prevValue = regRepl;
+        };
+
+        $('html').keydown(function (event) {
+
+            var checkKeyCode = function(keyCode) {
+                 
+               var liLast = document.querySelector('#resultList > li:last-child');
+               var liFirst = document.querySelector('#resultList > li:first-child');  
+                  
+               if (keyCode == 38) showActiveLi(liLast, 38);
+               if (keyCode == 40) showActiveLi(liFirst, 40);  
+                   
+               function showActiveLi(activeLi, keyCode) {   
+                   debugger; 
+                    if (activeHintIndex === 0) {
+                      activeLi.classList.add('bgGreen');
+                    }
+                    else {
+                        var prevLi = document.querySelector('#resultList > li.bgGreen');
+                        var prevLiData = prevLi.getAttribute('data');
+
+                        if ((prevLiData == 0 && keyCode == 38) || (prevLiData == liLength && keyCode == 40)) {
+                            prevLi.classList.remove("bgGreen");
+                            activeLi.classList.add('bgGreen');
+                        } 
+                        else {
+                            var checkAttr;
+                            var nextLi;
+
+                            if (keyCode == 38) checkAttr = +prevLiData - 1;
+                            if (keyCode == 40) checkAttr = +prevLiData + 1;
+
+                            nextLi = document.querySelector( 'li[data = '+checkAttr+']' );
+    
+                            nextLi.classList.add('bgGreen');
+                            prevLi.classList.remove("bgGreen");
+                        }
+                    }
+                 activeHintIndex = 1;
+                } 
+
+            } // end of checkKeyCode
+
+            checkKeyCode(event.keyCode);
+
+            if (event.keyCode == 13 && activeHintIndex != 0) {
+                var selected = $("#resultList li.bgGreen").text(); //
+                input.value = selected;
+            }
+        });
+
+    }; //// после ввоода 2-й буквы перестаёт работать подсветка
+</script>
+
+</html>

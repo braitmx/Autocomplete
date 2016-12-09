@@ -1,0 +1,17 @@
+{
+  "name": "expr",
+  "version": "1.0.0",
+  "description": "desc",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex",
+  "license": "ISC"
+}
