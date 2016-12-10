@@ -31,17 +31,18 @@ class Autocomplete {
     this.prevValue = value;
   };
 
-  addHintItem(item) {
-    const el = document.createElement('li')
-    el.innerText = item.city
+  addHintItem(item, i) {
+    const el = document.createElement('li');
+    el.innerText = item.city;
+    el.setAttribute("data", i);
 
     this.items.push({
       el: el,
       id: item.id,
       city: item.city
-    })
+    });
 
-    this.result[0].appendChild(el)
+    this.result[0].appendChild(el);
   }
 
   onSuccess(data) {
@@ -51,7 +52,7 @@ class Autocomplete {
 
       if (item != '') {
         // this.result.append("<li id='" + item.id + "' data='" + i + "' >" + item.city + "</li>");
-        this.addHintItem(item);
+        this.addHintItem(item, i);
       } else {
         this.result.append("<li>" + "Not found." + "</li>");
         return;
@@ -82,14 +83,14 @@ class Autocomplete {
     if (keyCode == this.KEY_DOWN) this.changeActiveLi(liFirst, this.KEY_DOWN);
 
     if (event.keyCode == this.KEY_ENTER && this.activeHintIndex != 0) {
-      debugger;
+
       this.input.val(this.result.find("li.bgGreen").text());
       //add input hidden
     }
   }
 
   changeActiveLi(activeLi, keyCode) {
-    debugger;
+
     if (this.activeHintIndex === 0) {
       activeLi.addClass('bgGreen');
     }
