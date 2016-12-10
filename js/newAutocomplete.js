@@ -14,6 +14,11 @@ class Autocomplete {
     this.items = [];
   }
 
+  firstCall() {
+    debugger;
+    this.input.on("keyup", this.onKeyUp.bind(this));
+  }
+
   onKeyUp() {
 
     var value = this.input.val();
@@ -116,4 +121,6 @@ class Autocomplete {
     }
     this.activeHintIndex = 1;
   }
+
 }
+
