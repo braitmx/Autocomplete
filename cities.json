@@ -1,34 +1,52 @@
-[
-  {
+{
+  "Belarus": [{
     "id": 1,
     "city": "Minsk"
-  },
-  {
+  }, {
     "id": 2,
     "city": "Brest"
-  },
-  {
+  }, {
     "id": 3,
     "city": "Gomel"
-  },
-  {
+  }, {
     "id": 4,
     "city": "Grodno"
-  },
-  {
+  }, {
     "id": 5,
     "city": "Mogilev"
-  },
-  {
+  }, {
     "id": 6,
     "city": "Vitebsk"
-  },
-  {
+  }, {
     "id": 7,
     "city": "Baranovichi"
-  },
-  {
+  }, {
     "id": 8,
     "city": "Bobruisk"
-  }
-]
+  }],
+  "Russia": [{
+    "id": 1,
+    "city": "Moscow"
+  }, {
+    "id": 2,
+    "city": "Brest"
+  }, {
+    "id": 3,
+    "city": "Gomel"
+  }, {
+    "id": 4,
+    "city": "Grodno"
+  }, {
+    "id": 5,
+    "city": "Mogilev"
+  }, {
+    "id": 6,
+    "city": "Vitebsk"
+  }, {
+    "id": 7,
+    "city": "Baranovichi"
+  }, {
+    "id": 8,
+    "city": "Bobruisk"
+  }]
+}

@@ -21,9 +21,7 @@ app.post('/api/cities/', urlencodedParser, function (req, res) {
 
     var i = 0, result = [];
 
-    //use instead foreach filter and map
-
-    cities.forEach(function(item) {
+    cities.Belarus.forEach(function(item) {
         var searchLet = req.body.value.toLowerCase();
         var search = item.city.toLowerCase().match(searchLet);
 

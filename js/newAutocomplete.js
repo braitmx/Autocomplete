@@ -56,7 +56,6 @@ class Autocomplete {
     data.forEach(function (item, i, data) {
 
       if (item != '') {
-        // this.result.append("<li id='" + item.id + "' data='" + i + "' >" + item.city + "</li>");
         this.addHintItem(item, i);
       } else {
         this.result.append("<li>" + "Not found." + "</li>");
