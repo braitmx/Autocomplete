@@ -29,24 +29,30 @@
     "city": "Moscow"
   }, {
     "id": 2,
-    "city": "Brest"
+    "city": "Voronezh"
   }, {
     "id": 3,
-    "city": "Gomel"
+    "city": "Yekaterinburg"
   }, {
     "id": 4,
-    "city": "Grodno"
+    "city": "Kazan"
   }, {
     "id": 5,
-    "city": "Mogilev"
+    "city": "Kaliningrad"
   }, {
     "id": 6,
-    "city": "Vitebsk"
+    "city": "Krasnoyarsk"
   }, {
     "id": 7,
-    "city": "Baranovichi"
+    "city": "Nizhny Novgorod"
   }, {
     "id": 8,
-    "city": "Bobruisk"
+    "city": "Novosibirsk"
+  }, {
+    "id": 9,
+    "city": "Omsk"
+  }, {
+    "id": 10,
+    "city": "Penza"
   }]
 }

@@ -17,11 +17,28 @@ app.get('/', function (req, res) {
     res.render('indexNew.ejs');
 });
 
-app.post('/api/cities/', urlencodedParser, function (req, res) {
+app.post('/api/Belarus/', urlencodedParser, function (req, res) {
 
     var i = 0, result = [];
 
     cities.Belarus.forEach(function(item) {
+        var searchLet = req.body.value.toLowerCase();
+        var search = item.city.toLowerCase().match(searchLet);
+
+        if (search != null && search.index === 0 && searchLet != '') {
+            result[i] = item;
+            i++;
+        }
+    });
+
+    res.send(result);
+});
+
+app.post('/api/Russia/', urlencodedParser, function (req, res) {
+
+    var i = 0, result = [];
+
+    cities.Russia.forEach(function(item) {
         var searchLet = req.body.value.toLowerCase();
         var search = item.city.toLowerCase().match(searchLet);
 
