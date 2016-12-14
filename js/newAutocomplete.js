@@ -15,13 +15,12 @@ class Autocomplete {
   }
 
   firstCall() {
-    debugger;
     this.input.on("keyup", this.onKeyUp.bind(this));
   }
 
   onKeyUp() {
-
     var value = this.input.val();
+
     value = value.replace(/[^a-z]/gi, '');
 
     if (this.prevValue === value) return;
@@ -53,14 +52,14 @@ class Autocomplete {
   onSuccess(data) {
     this.result.empty();
 
+    if(data.length === 0) {
+      this.result.append("<li>" + "Not found." + "</li>");
+      return;
+    }
+
     data.forEach(function (item, i, data) {
 
-      if (item != '') {
-        this.addHintItem(item, i);
-      } else {
-        this.result.append("<li>" + "Not found." + "</li>");
-        return;
-      }
+      if (item != '') this.addHintItem(item, i);
     }.bind(this));
 
     this.dataLength = data.length - 1;
@@ -96,7 +95,7 @@ class Autocomplete {
   changeActiveLi(activeLi, keyCode) {
 
     if (this.activeHintIndex === 0) {
-      activeLi.addClass('bgGreen');
+      activeLi.addClass("bgGreen");
     }
     else {
       var prevLi = this.result.find("li.bgGreen");
@@ -104,7 +103,7 @@ class Autocomplete {
 
       if ((prevIndex == 0 && keyCode == this.KEY_UP) || (prevIndex == this.dataLength && keyCode == this.KEY_DOWN)) {
         prevLi.removeClass("bgGreen");
-        activeLi.addClass('bgGreen');
+        activeLi.addClass("bgGreen");
       }
       else {
         var index;
@@ -114,7 +113,7 @@ class Autocomplete {
         if (keyCode == this.KEY_DOWN) index = +prevIndex + 1;
 
         nextLi = $('[data = ' + index + ']');
-        nextLi.addClass('bgGreen');
+        nextLi.addClass("bgGreen");
         prevLi.removeClass("bgGreen");
       }
     }
