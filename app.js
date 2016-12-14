@@ -17,11 +17,12 @@ app.get('/', function (req, res) {
     res.render('indexNew.ejs');
 });
 
-app.post('/api/Belarus/', urlencodedParser, function (req, res) {
+function GetCities(req, res, country) {
 
     var i = 0, result = [];
 
-    cities.Belarus.forEach(function(item) {
+    country.forEach(function(item) {
+
         var searchLet = req.body.value.toLowerCase();
         var search = item.city.toLowerCase().match(searchLet);
 
@@ -32,25 +33,15 @@ app.post('/api/Belarus/', urlencodedParser, function (req, res) {
     });
 
     res.send(result);
-});
+}
 
 app.post('/api/Russia/', urlencodedParser, function (req, res) {
-
-    var i = 0, result = [];
-
-    cities.Russia.forEach(function(item) {
-        var searchLet = req.body.value.toLowerCase();
-        var search = item.city.toLowerCase().match(searchLet);
-
-        if (search != null && search.index === 0 && searchLet != '') {
-            result[i] = item;
-            i++;
-        }
-    });
-
-    res.send(result);
+   GetCities(req, res, cities.Russia);
 });
 
+app.post('/api/Belarus/', urlencodedParser, function (req, res) {
+   GetCities(req, res, cities.Belarus);
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
